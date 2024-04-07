@@ -5,14 +5,12 @@
 
 
 body {
-  color: #222222;
   background-color: transparent;
 }
 
 * {
   font-family: "Merriweather", serif;
   font-weight: 400;
-  color: #222222;
   background-color: transparent;
   box-sizing: border-box;
 }
