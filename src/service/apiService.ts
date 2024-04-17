@@ -3,7 +3,7 @@
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 const apiService = {
-  async request(url: string, method: string, data: any, headers = {}) {
+  async request<T>(url: string, method: string, data: T, headers = {}) {
     try {
       const options = {
         method,
@@ -45,22 +45,22 @@ const apiService = {
     }
   },
 
-  async get(url: string, data: any, headers = {}) {
+  async get<T>(url: string, data: T, headers = {}) {
     // For GET method, data is passed as query parameters
-    return this.request(url, "GET", data, headers);
+    return this.request<T>(url, "GET", data, headers);
   },
 
-  async post<T>(url: string, data: any, headers = {}) {
-    return this.request(url, "POST", data, headers);
+  async post<T>(url: string, data: T, headers = {}) {
+    return this.request<T>(url, "POST", data, headers);
   },
 
-  async put(url: string, data: any, headers = {}) {
-    return this.request(url, "PUT", data, headers);
+  async put<T>(url: string, data: T, headers = {}) {
+    return this.request<T>(url, "PUT", data, headers);
   },
 
-  async delete(url: string, data: any, headers = {}) {
+  async delete<T>(url: string, data: T, headers = {}) {
     // For DELETE method, data is included in the request body
-    return this.request(url, "DELETE", data, headers);
+    return this.request<T>(url, "DELETE", data, headers);
   },
 };
 
