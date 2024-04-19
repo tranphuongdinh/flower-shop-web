@@ -13,7 +13,7 @@ export default async function ListPage(props: PageProps) {
     <div>
       {data?.length ? (
         data.map((product: Product) => {
-          return <ProductCard product={product} />;
+          return <ProductCard product={product} key={product._id} />;
         })
       ) : (
         <div>Khong tim thay ket qua</div>
