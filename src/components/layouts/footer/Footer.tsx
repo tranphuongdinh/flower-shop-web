@@ -3,7 +3,7 @@ import PhoneIcon from "@/components/icons/PhoneIcon";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-light flex items-start flex-col py-8 gap-1 px-4">
+    <footer className="mb-12 bg-primary-light flex items-start flex-col py-8 gap-1 px-4">
       <p className="text-primary text-lg italic font-bold">Pearly Minh Shop</p>
       <div className="flex gap-2 items-center">
         <LocationIcon className="text-primary" />

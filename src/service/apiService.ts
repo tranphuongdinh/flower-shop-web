@@ -3,7 +3,7 @@
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 const apiService = {
-  async request<T>(url: string, method: string, data: T, headers = {}) {
+  async request<T>(url: string, method: string, data?: T, headers = {}) {
     try {
       const options = {
         method,
@@ -31,7 +31,7 @@ const apiService = {
       return {
         code: response.status,
         message: "Success",
-        data: responseData.data,
+        data: responseData.data as T,
         error: null,
       };
     } catch (error) {
@@ -45,7 +45,7 @@ const apiService = {
     }
   },
 
-  async get<T>(url: string, data: T, headers = {}) {
+  async get<T>(url: string, data?: T, headers = {}) {
     // For GET method, data is passed as query parameters
     return this.request<T>(url, "GET", data, headers);
   },
