@@ -1,16 +1,16 @@
-"use client";
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
-import "swiper/css/effect-fade";
-import Image from "next/image";
+'use client';
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css/effect-fade';
+import Image from 'next/image';
 
 const MainBanner = () => {
   return (
     <section id="mainBanner">
       <div className="w-full  h-[150px] overflow-hidden">
         <Swiper
-          effect={"fade"}
+          effect={'fade'}
           modules={[Autoplay, EffectFade]}
           spaceBetween={0}
           slidesPerView={1}
@@ -24,7 +24,7 @@ const MainBanner = () => {
         >
           <SwiperSlide>
             <Image
-              src={"/banners/banner1.png"}
+              src={'/banners/banner1.png'}
               width={600}
               height={150}
               alt="main banner 1"
@@ -36,7 +36,7 @@ const MainBanner = () => {
           </SwiperSlide>
           <SwiperSlide>
             <Image
-              src={"/banners/banner2.jpg"}
+              src={'/banners/banner2.jpg'}
               width={600}
               height={150}
               alt="main banner 2"

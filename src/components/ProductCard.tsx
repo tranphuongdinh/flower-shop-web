@@ -1,5 +1,5 @@
-import { Product } from "@/types/Product";
-import Image from "next/image";
+import { Product } from '@/types/Product';
+import Image from 'next/image';
 
 interface Props {
   product: Product;

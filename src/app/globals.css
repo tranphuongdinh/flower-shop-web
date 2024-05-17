@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 body {
   background-color: transparent;
 }
 
 * {
-  font-family: "Merriweather", serif;
+  font-family: 'Merriweather', serif;
   font-weight: 400;
   background-color: transparent;
   box-sizing: border-box;

@@ -1,7 +1,7 @@
-import Categories from "@/components/layouts/Categories/Categories";
-import MainBanner from "@/components/layouts/MainBanner/MainBanner";
-import Search from "@/components/layouts/Search/Search";
-import Image from "next/image";
+import Categories from '@/components/layouts/Categories/Categories';
+import MainBanner from '@/components/layouts/MainBanner/MainBanner';
+import Search from '@/components/layouts/Search/Search';
+import Image from 'next/image';
 
 export default async function Home() {
   return (

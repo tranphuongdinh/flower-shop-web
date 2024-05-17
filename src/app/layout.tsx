@@ -1,21 +1,16 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import Layout from "@/components/layouts/Layout";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Layout from '@/components/layouts/Layout';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Pearly Flower - Hoa tươi, hoa sáp",
-  description: "Hoa tươi,  hoa sáp, hoa tốt nghiệp, hoa chúc mừng giá rẻ, giao nhanh",
+  title: 'Pearly Flower - Hoa tươi, hoa sáp',
+  description: 'Hoa tươi,  hoa sáp, hoa tốt nghiệp, hoa chúc mừng giá rẻ, giao nhanh',
 };
 
-export default function RootLayout({
-  children,
-  ...props
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children, ...props }: { children: React.ReactNode }) {
   return (
     <html lang="vi">
       <head>
@@ -27,7 +22,7 @@ export default function RootLayout({
         />
       </head>
 
-    <body className={inter.className}>
+      <body className={inter.className}>
         <Layout {...props}>{children}</Layout>
       </body>
     </html>

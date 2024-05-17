@@ -1,67 +1,86 @@
-// services/apiService.js
+import axios, { AxiosRequestConfig } from 'axios';
 
-const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+const baseURL = process.env.NEXT_BASE_URL;
 
-const apiService = {
-  async request<T>(url: string, method: string, data?: T, headers = {}) {
-    try {
-      const options = {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-          ...headers,
-        },
-        // For methods other than GET, include data in the request body
-        body: method !== "GET" ? JSON.stringify(data) : null,
+type AxiosData = AxiosRequestConfig['data'];
+type AxiosParams = AxiosRequestConfig['params'];
+
+export interface ApiResponse<T> {
+  statusCode: number;
+  message: string[];
+  data: T;
+  total?: number;
+  successCode?: string;
+  status?: number;
+}
+
+const API = {
+  get(url: string, params?: AxiosParams) {
+    return this.request({
+      url,
+      method: 'GET',
+      params,
+    });
+  },
+  post(url: string, data?: AxiosData, isFormData?: boolean) {
+    return this.request({
+      url,
+      method: 'POST',
+      data,
+      isFormData,
+    });
+  },
+  put(url: string, data: AxiosData, isFormData?: boolean) {
+    return this.request({
+      url,
+      method: 'PUT',
+      data,
+      isFormData,
+    });
+  },
+  patch(url: string, data: AxiosData) {
+    return this.request({
+      url,
+      method: 'PATCH',
+      data,
+    });
+  },
+  delete(url: string) {
+    return this.request({
+      url,
+      method: 'DELETE',
+    });
+  },
+
+  request<T = never, R = ApiResponse<T>>(config: {
+    url: string;
+    method: string;
+    params?: AxiosParams;
+    data?: AxiosData;
+    isFormData?: boolean;
+  }): Promise<R> {
+    return new Promise((resolve, reject) => {
+      let jwt = '';
+
+      const headers = {
+        'Content-Type': config.isFormData ? 'multipart/form-data' : 'application/json',
+        // Authorization: `Bearer ${jwt}`,
       };
 
-      // For GET method, append data as query parameters to the URL
-      const apiUrlWithParams =
-        method === "GET" && data
-          ? `${apiUrl}${url}?${new URLSearchParams(data).toString()}`
-          : `${apiUrl}${url}`;
-
-      const response = await fetch(apiUrlWithParams, options);
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        throw new Error(responseData.error || "HTTP error!");
-      }
-
-      return {
-        code: response.status,
-        message: "Success",
-        data: responseData.data as T,
-        error: null,
-      };
-    } catch (error) {
-      console.error("API Error:", error);
-      return {
-        code: 500,
-        message: error || "Internal Server Error",
-        data: [],
-        error: error,
-      };
-    }
-  },
-
-  async get<T>(url: string, data?: T, headers = {}) {
-    // For GET method, data is passed as query parameters
-    return this.request<T>(url, "GET", data, headers);
-  },
-
-  async post<T>(url: string, data: T, headers = {}) {
-    return this.request<T>(url, "POST", data, headers);
-  },
-
-  async put<T>(url: string, data: T, headers = {}) {
-    return this.request<T>(url, "PUT", data, headers);
-  },
-
-  async delete<T>(url: string, data: T, headers = {}) {
-    // For DELETE method, data is included in the request body
-    return this.request<T>(url, "DELETE", data, headers);
+      return axios({ baseURL, headers, ...config, withCredentials: true })
+        .then((response) => resolve(response.data))
+        .catch((error) => {
+          if (!error.response) {
+            return reject(error);
+          }
+          // const { status } = error.response;
+          // if (status === 401) {
+          //   useAuth.getState().setAuth('');
+          // }
+          reject(error?.response?.data);
+        });
+    });
   },
 };
 
-export default apiService;
+export default API;
